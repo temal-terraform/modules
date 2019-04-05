@@ -42,11 +42,31 @@ resource "aws_route_table_association" "public_eu_central_1c" {
 }
 
 # Routing private subnets
-resource "aws_route_table" "private" {
+resource "aws_route_table" "private_1a" {
   vpc_id = "${aws_vpc.vpc.id}"
 
   tags {
-    Name        = "${var.environment}-${var.tenant}-private"
+    Name        = "${var.environment}-${var.tenant}-private-1a"
+    environment = "${var.environment}"
+    tenant      = "${var.tenant}"
+  }
+}
+
+resource "aws_route_table" "private_1b" {
+  vpc_id = "${aws_vpc.vpc.id}"
+
+  tags {
+    Name        = "${var.environment}-${var.tenant}-private-1b"
+    environment = "${var.environment}"
+    tenant      = "${var.tenant}"
+  }
+}
+
+resource "aws_route_table" "private_1c" {
+  vpc_id = "${aws_vpc.vpc.id}"
+
+  tags {
+    Name        = "${var.environment}-${var.tenant}-private-1c"
     environment = "${var.environment}"
     tenant      = "${var.tenant}"
   }
@@ -54,15 +74,15 @@ resource "aws_route_table" "private" {
 
 resource "aws_route_table_association" "private_eu_central_1a" {
   subnet_id      = "${aws_subnet.private_eu_central_1a.id}"
-  route_table_id = "${aws_route_table.private.id}"
+  route_table_id = "${aws_route_table.private_1a.id}"
 }
 
 resource "aws_route_table_association" "private_eu_central_1b" {
   subnet_id      = "${aws_subnet.private_eu_central_1b.id}"
-  route_table_id = "${aws_route_table.private.id}"
+  route_table_id = "${aws_route_table.private_1b.id}"
 }
 
 resource "aws_route_table_association" "private_eu_central_1c" {
   subnet_id      = "${aws_subnet.private_eu_central_1c.id}"
-  route_table_id = "${aws_route_table.private.id}"
+  route_table_id = "${aws_route_table.private_1c.id}"
 }
